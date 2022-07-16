@@ -1,0 +1,29 @@
+NEXT STEPS: inflation basket idea
+
+data model: 
+
+STAPKLE: 
+The good's COMMON_NAME describes (no spaces) (up to 80 characters). It is not necessarily a key.  
+The good's FULL_NAME describes a fuller description for the food in question (with spaces) (up to 120 characters) 
+The good's SELECTOR describes, when a good is duplicated, which specified item it is. 
+The good's FOOD_ID is an integral identifying the food across the tables. 
+The good's MANU_CENTER, or central location where it is manufactured and used
+ 
+PRICE: Each entry contains
+The good's FOOD_ID, constrained to values from the GOOD table. 
+The good's NAME (common_name from GOOD table) 
+The good's decimal PRICE (decimal(5,2)) describing some dollar price between 0 and 1000 dollars
+The good's CPI index VALUE (decimal (6,3) describing some price between 0  and 1000 units) 
+
+https://www.bls.gov/news.release/cpi.htm
+I am interested in table 3: 
+
+
+Here is a note on current dollars versus constant or real dollars.
+We want current dollars
+Notes: 
+Food
+energy 
+apparel 
+services 
+rental costs
