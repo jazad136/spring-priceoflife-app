@@ -17,11 +17,10 @@ package net.saddlercoms.priceoflife.model;
 
 import java.util.List;
 
-
-
 public class StationPrices {
 	private Long stationId;
 	private String vendor;
+	private String street;
 	private List<CostLine> costLines;
 	
 	public StationPrices() { } 
@@ -32,14 +31,18 @@ public class StationPrices {
 	public String getVendor() { return vendor; }
 	public void setVendor(String value) { this.vendor = value; }
 	
+	public String getStreet() { return street; }
+	public void setStreet(String street) { this.street = street; }
+
 	public List<CostLine> getCostLines() { return costLines; }
 	public void setCostLines(List<CostLine> costLines) { this.costLines = costLines; }
 
 	@Override
 	public String toString() {
 		final int maxLen = 10;
-		return "StationPrices [stationId=" + stationId + ", vendor=" + vendor + ", costLines="
+		return "StationPrices [stationId=" + stationId + ", vendor=" + vendor + ", street=" + street + ", costLines="
 				+ (costLines != null ? costLines.subList(0, Math.min(costLines.size(), maxLen)) : null) + "]";
 	}
+
 	
 }

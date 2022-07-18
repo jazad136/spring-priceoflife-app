@@ -3,6 +3,7 @@ package net.saddlercoms.priceoflife.web.db;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,6 +18,8 @@ import net.saddlercoms.priceoflife.model.CostLine;
 import net.saddlercoms.priceoflife.model.CostTableValue;
 import net.saddlercoms.priceoflife.model.Producer.DateProducer;
 import net.saddlercoms.priceoflife.model.Producer.DecimalProducer;
+import net.saddlercoms.priceoflife.model.Producer.LongProducer;
+import net.saddlercoms.priceoflife.model.Producer.StringProducer;
 import net.saddlercoms.priceoflife.model.StationPrices;
 
 @Component
@@ -58,7 +61,7 @@ public class PriceDAO implements DataAccessObject{
 	
 	private static class PriceMapper implements RowMapper<CostLine> {
 
-		int idxDblPrice, idxDatRetrievedDate;
+//		int idxDblPrice, idxDatRetrievedDate;
 		private DecimalProducer dblPrice;
 		private DateProducer datRetrievedDate;
 		
@@ -69,52 +72,58 @@ public class PriceDAO implements DataAccessObject{
 			this.datRetrievedDate = datRetrievedDate;
 		}
 		
-		public PriceMapper() { 
-			idxDblPrice = CostTableValue.PRICE.ordinal() + 1;
-			idxDatRetrievedDate = CostTableValue.RETRIEVED_DATE.ordinal() + 1;
-		}
-		
 		// complete
+//		public CostLine mapRowOld(ResultSet rs, int rowNum) throws SQLException {
+//			CostLine cl = new CostLine();
+////			cl.setPrice(CostTableValue.PRICE.func.apply(idxDblPrice, rowNum));
+//			cl.setPrice(new BigDecimal(rs.getDouble(idxDblPrice)));
+//			cl.setRetrievedDate(new Date(rs.getDate(idxDatRetrievedDate).getTime()));
+//			return cl;
+//		}
 		@Override
 		public CostLine mapRow(ResultSet rs, int rowNum) throws SQLException {
 			CostLine cl = new CostLine();
-//			cl.setPrice(CostTableValue.PRICE.func.apply(idxDblPrice, rowNum));
-			cl.setPrice(new BigDecimal(rs.getDouble(idxDblPrice)));
-			cl.setRetrievedDate(new Date(rs.getDate(idxDatRetrievedDate).getTime()));
-			return cl;
-		}
-		public CostLine mapRow2(ResultSet rs, int rowNum) throws SQLException {
-			CostLine cl = new CostLine();
-			cl.setPrice(CostTableValue.PRICE.func.apply(idxDblPrice, rs));
-			cl.setPrice(new BigDecimal(rs.getDouble(idxDblPrice)));
-			cl.setRetrievedDate(new Date(rs.getDate(idxDatRetrievedDate).getTime()));
+			cl.setPrice(dblPrice.apply(rs));
+			cl.setRetrievedDate(datRetrievedDate.apply(rs));
 			return cl;
 		}
 	}
-	private static class StationPricesExtractor implements ResultSetExtractor<StationPrices> {
+	private static class StationPricesExtractor implements ResultSetExtractor<List<StationPrices>> {
 
-		int idxDblPrice, idxDatRetrievedDate;
+		private LongProducer intStationId;
+		private StringProducer strVendor;
+		private StringProducer strStreet;
+		private DecimalProducer dblPrice;
+		private DateProducer datRetrievedDate;
 		
-		public StationPricesExtractor(int idxDblPrice, int idxDatRetrievedDate) {
-			this.idxDblPrice = idxDblPrice;
-			this.idxDatRetrievedDate = idxDatRetrievedDate;
+		public StationPricesExtractor(int idxStrVendor, int idxStrStreet, int idxDblPrice, int idxDatRetrievedDate) {
+			this.strVendor = new StringProducer(idxStrVendor);
+			this.strStreet = new StringProducer(idxStrStreet);
+			this.dblPrice = new DecimalProducer(idxDblPrice);
+			this.datRetrievedDate = new DateProducer(idxDatRetrievedDate);
+			this.strVendor = new StringProducer(idxStrVendor);
 		}
 		
 		
 		@Override
-		public StationPrices extractData(ResultSet rs) throws SQLException, DataAccessException {
-			StationPrices sp = null;
-			List<CostLine> stationPrices = new LinkedList<>();
+		public List<StationPrices> extractData(ResultSet rs) throws SQLException, DataAccessException {
+			List<StationPrices> stationPrices = new LinkedList<>();
 			long stationId = -1;
+			StationPrices sp = null;
 			while(rs.next()) {
-				if(stationId == -1) { 
+				long localId = rs.getLong(intStationId.apply(rs));
+				if(stationId != localId) { 
 					sp = new StationPrices();
-					sp.setStationId(stationId);
+					sp.setStationId(localId);
+					sp.setStreet(strStreet.apply(rs));
+					sp.setVendor(strVendor.apply(rs));
+					stationPrices.add(sp);
+					localId = stationId;
 				}
 				CostLine cl = new CostLine();
-				cl.setPrice(new BigDecimal(rs.getDouble(idxDblPrice)));
-				cl.setRetrievedDate(new Date(rs.getDate(idxDatRetrievedDate).getTime()));
-				stationPrices.add(cl);
+				cl.setPrice(dblPrice.apply(rs));
+				cl.setRetrievedDate(new Date(datRetrievedDate.apply(rs).getTime()));
+				sp.getCostLines().add(cl);
 			}
 			return stationPrices;
 		} 

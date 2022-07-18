@@ -5,34 +5,34 @@ import java.util.List;
 
 public class TimePrices {
 	private Long stationId;
-	private String name;
-	private Integer grade; 
+	private String vendor;
+	private String street;
 	private LocalDate firstRetrived;
 	private LocalDate lastRetrieved;
 	private List<CostLine> costLines;
 	
 	public Long getStationId() { return stationId; } 
-	public void setStationId(Long value) { this.stationId = value; } 
+	public void setStationId(Long value) { stationId = value; } 
 	
-	public String getName() { return name; }
-	public void setName(String name) { this.name = name; }
+	public String getVendor() { return vendor; }
+	public void setVendor(String value) { vendor = value; }
 
-	public int getGasGrade() { return grade; }
-	public void setGasGrade(Integer value) { this.grade = value; }
-	
+	public String getStreet() { return street; }
+	public void setStreet(String value) { street = value; }
+
 	public LocalDate getFirstRetrived() { return firstRetrived; }
-	public void setFirstRetrived(LocalDate firstRetrived) { this.firstRetrived = firstRetrived; }
+	public void setFirstRetrived(LocalDate value) { firstRetrived = value; }
 	
 	public LocalDate getLastRetrieved() { return lastRetrieved; }
-	public void setLastRetrieved(LocalDate lastRetrieved) { this.lastRetrieved = lastRetrieved; }
+	public void setLastRetrieved(LocalDate value) { lastRetrieved = value; }
 	
 	public List<CostLine> getCostLines() { return costLines; }
-	public void setCostLines(List<CostLine> costLines) { this.costLines = costLines; }
+	public void setCostLines(List<CostLine> value) { this.costLines = value; }
 	
 	@Override
 	public String toString() {
 		final int maxLen = 10;
-		return "TimePrice [stationId=" + stationId + ", name=" + name + ", grade=" + grade + ", firstRetrived="
+		return "TimePrice [stationId=" + stationId + ", vendor=" + vendor + ", street=" + street + ", firstRetrived="
 				+ firstRetrived + ", lastRetrieved=" + lastRetrieved + ", costLines="
 				+ (costLines != null ? costLines.subList(0, Math.min(costLines.size(), maxLen)) : null) + "]";
 	}
