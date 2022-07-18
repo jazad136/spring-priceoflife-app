@@ -19,32 +19,27 @@ import java.util.List;
 
 
 
-public class GasPrice {
+public class StationPrices {
 	private Long stationId;
-	private String name;
-	private Integer grade; 
+	private String vendor;
 	private List<CostLine> costLines;
 	
-	public GasPrice() { } 
+	public StationPrices() { } 
 	
 	public Long getStationId() { return stationId; } 
 	public void setStationId(Long value) { this.stationId = value; } 
 	
-	public String getName() { return name; }
-	public void setName(String name) { this.name = name; }
-
-	public int getGasGrade() { return grade; }
-	public void setGasGrade(Integer value) { this.grade = value; }
+	public String getVendor() { return vendor; }
+	public void setVendor(String value) { this.vendor = value; }
 	
 	public List<CostLine> getCostLines() { return costLines; }
 	public void setCostLines(List<CostLine> costLines) { this.costLines = costLines; }
-	
+
 	@Override
 	public String toString() {
-		return "GasPrice [stationId=" + stationId + ", name=" + name + ", grade=" + grade + ", costLines=" + costLines
-				+ "]";
+		final int maxLen = 10;
+		return "StationPrices [stationId=" + stationId + ", vendor=" + vendor + ", costLines="
+				+ (costLines != null ? costLines.subList(0, Math.min(costLines.size(), maxLen)) : null) + "]";
 	}
-	
-	
 	
 }
