@@ -61,7 +61,7 @@
 	            <groupId>org.flywaydb</groupId>
 	            <artifactId>flyway-maven-plugin</artifactId>
 	            <configuration>
-	                <url>jdbc:postgresql://localhost:5432/pricelife</url>
+	                <url>jdbc:postgresql://localhost:5432/vactrac</url>
 	                <user>postgres</user>
 	                <password>password</password>
 	            </configuration>
