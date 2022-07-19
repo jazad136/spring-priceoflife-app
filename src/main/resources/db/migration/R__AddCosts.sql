@@ -1,13 +1,13 @@
 -- GAS
-INSERT INTO price (vendor, grade, price, retrieved_date) values('Marathon Gas Station'        , 1, 4.09, '2022-03-27 00:00:00');
-INSERT INTO price (vendor, grade, price, retrieved_date) values('Speedway Gas Station'        , 1, 4.14, '2022-03-27 00:00:00');
+INSERT INTO price (vendor, grade, price, retrieved_date) values('Marathon Corunna'            , 1, 4.09, '2022-03-27 00:00:00');
+INSERT INTO price (vendor, grade, price, retrieved_date) values('Marathon Corunna'            , 1, 4.14, '2022-03-27 00:00:00');
 INSERT INTO price (vendor, grade, price, retrieved_date) values('Speedway Miller'             , 1, 4.14, '2022-03-27 00:00:00');
 
 INSERT INTO price (vendor, grade, price, retrieved_date) values('Marathon Coldwater'          , 1, 4.10, '2022-03-28 00:00:00');
 INSERT INTO price (vendor, grade, price, retrieved_date) values('Marathon Coldwater'          , 2, 4.50, '2022-03-28 00:00:00');
 INSERT INTO price (vendor, grade, price, retrieved_date) values('Marathon Coldwater'          , 3, 4.90, '2022-03-28 00:00:00');
 
-INSERT INTO price (vendor, price, grade, retrieved_date) values('Sunoco W. Washington Center' , 1, 4.10, '2022-03-28 00:00:00');
+INSERT INTO price (vendor, grade, price, retrieved_date) values('Sunoco W. Washington Center' , 1, 4.10, '2022-03-28 00:00:00');
 INSERT INTO price (vendor, grade, price, retrieved_date) values('Sunoco W. Washington Center' , 2, 4.45, '2022-03-28 00:00:00');
 INSERT INTO price (vendor, grade, price, retrieved_date) values('Sunoco W. Washington Center' , 3, 4.91, '2022-03-28 00:00:00');
 

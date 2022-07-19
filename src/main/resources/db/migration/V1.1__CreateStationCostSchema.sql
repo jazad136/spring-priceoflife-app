@@ -1,8 +1,8 @@
 CREATE SEQUENCE vt_station_seq start with 1000;
 
 CREATE TABLE station (
-  gas_id bigint PRIMARY KEY DEFAULT nextval('vt_station_seq'),
-  vendor varchar(40),
+  station_id bigint DEFAULT nextval('vt_station_seq'),
+  vendor varchar(40) PRIMARY KEY,
   street varchar(40),
   city_state varchar(40)
 );

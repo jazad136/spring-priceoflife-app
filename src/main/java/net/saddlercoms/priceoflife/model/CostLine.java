@@ -20,15 +20,20 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /** 
  * Source code for Cost. 
  */
 public class CostLine {
 	
+	private int grade;
 	private BigDecimal price;
 	private Date retrievedDate;
 	
+	@JsonIgnore
 	private final DecimalFormat priceFormat;
+	
 	public CostLine() { 
 		priceFormat = (DecimalFormat)DecimalFormat.getInstance();
 		priceFormat.setMinimumFractionDigits(2);
@@ -38,6 +43,9 @@ public class CostLine {
 	
 	public DecimalFormat getCostLinePriceFormat() { return priceFormat; } 
 	
+	public int getGrade() { return grade; }
+	public void setGrade(int grade) { this.grade = grade; }
+
 	public String getPrice() { return priceFormat.format(price); }
 	public BigDecimal getPriceDecimal() { return price; } 
 	public void setPrice(BigDecimal price) { this.price = price; }

@@ -22,7 +22,7 @@ public class StationService {
 	
 	public List<StationPrices> lookupAll() { 
 		LOG.info("Lookup ALL StationPrices objects");
-		priceDAO.findAllData();
+		return priceDAO.findAllData();
 	}
 	
 }

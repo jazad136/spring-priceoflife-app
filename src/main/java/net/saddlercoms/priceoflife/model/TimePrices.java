@@ -6,6 +6,7 @@ import java.util.List;
 public class TimePrices {
 	private Long stationId;
 	private String vendor;
+	private String cityState;
 	private String street;
 	private LocalDate firstRetrived;
 	private LocalDate lastRetrieved;
@@ -17,6 +18,9 @@ public class TimePrices {
 	public String getVendor() { return vendor; }
 	public void setVendor(String value) { vendor = value; }
 
+	public String getCityState() { return cityState; }
+	public void setCityState(String cityState) { this.cityState = cityState; }
+	
 	public String getStreet() { return street; }
 	public void setStreet(String value) { street = value; }
 
@@ -29,13 +33,17 @@ public class TimePrices {
 	public List<CostLine> getCostLines() { return costLines; }
 	public void setCostLines(List<CostLine> value) { this.costLines = value; }
 	
+	
 	@Override
 	public String toString() {
 		final int maxLen = 10;
-		return "TimePrice [stationId=" + stationId + ", vendor=" + vendor + ", street=" + street + ", firstRetrived="
-				+ firstRetrived + ", lastRetrieved=" + lastRetrieved + ", costLines="
+		return "TimePrices [stationId=" + stationId + ", vendor=" + vendor + ", cityState=" + cityState + ", street="
+				+ street + ", firstRetrived=" + firstRetrived + ", lastRetrieved=" + lastRetrieved + ", costLines="
 				+ (costLines != null ? costLines.subList(0, Math.min(costLines.size(), maxLen)) : null) + "]";
 	}
+	
+
+
 	
 	
 	
